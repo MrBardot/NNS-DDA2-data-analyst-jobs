@@ -100,15 +100,8 @@ WHERE title ILIKE '%Analyst%';
 --#11 774 titles
 
 
---#12.How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’?
-SELECT COUNT(DISTINCT title)
-FROM data_analyst_jobs
-EXCEPT
-SELECT COUNT(DISTINCT title)
-FROM data_analyst_jobs
-WHERE title ILIKE '%Analyst%' OR title ILIKE '%Analytics%';
---#12
---What word do these positions have in common?
+/* #12.How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? 4 titles
+--What word do these positions have in common?*/
 SELECT DISTINCT(data_analyst_jobs.title), company
 FROM data_analyst_jobs
 EXCEPT
@@ -131,14 +124,16 @@ GROUP BY domain
 ORDER BY COUNT(domain) DESC;
 
 /* Top 3 industries = 
-	Internet and Software
+	*Internet and Software 
 	Banks and Financial Services
 	Consulting and Business Services
+	Health Care
 Number of jobs, TOP 4:
-	Internet Software - 62
+	*Internet Software - 62
 	Banks - 61
 	Consulting - 57
-	Health Care - 52 */
+	Health Care - 52
+	Insurance Health Care - 21 */
 
 
 
