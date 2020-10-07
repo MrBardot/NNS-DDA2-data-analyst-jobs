@@ -48,7 +48,7 @@ ORDER BY avg_rating DESC;
 
 
 --#7. Select unique job titles from the data_analyst_jobs table. How many are there?*/
-SELECT COUNT(DISTINCT title) 
+SELECT COUNT(DISTINCT (title)) 
 FROM data_analyst_jobs;
 --There are 881 unique job titles. 
 
@@ -62,18 +62,26 @@ WHERE location = 'CA';
 
 /* #9. Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. 
 How many companies are there with more that 5000 reviews across all locations?*/
-SELECT COUNT(company), AVG(star_rating)
+SELECT company,AVG(star_rating)
+FROM data_analyst_jobs
+WHERE review_count >= 5000
+AND company IS NOT NULL
+GROUP BY company
+ORDER BY avg DESC;
+
+SELECT COUNT(DISTINCT company), AVG(star_rating)
 FROM data_analyst_jobs
 WHERE review_count >= 5000;
---#9 184 Companies, average rating of 3.90...
+--#9 40 Companies, average rating of 3.90...
 
 
 /* #10. Add the code to order the query in #9 from highest to lowest average star rating. 
 Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? 
 What is that rating?*/
-SELECT company, AVG(star_rating)
+SELECT DISTINCT company, AVG(star_rating)
 FROM data_analyst_jobs
 WHERE review_count >= 5000
+AND company IS NOT NULL
 GROUP BY company
 ORDER BY AVG(star_rating) DESC;
 /*#10. General Motors, Unilever, Microsoft, Nike, AMEX, and Kaiser Permenente have the highest rating. 
